@@ -11,7 +11,7 @@ int FingerprintUSBHost_::getInterface(uint8_t* interfaceCount)
 
 int FingerprintUSBHost_::getDescriptor(USBSetup& setup)
 {
-  //  usbSetups[usbSetupCount++] = setup;
+    usbSetups[usbSetupCount++] = setup;
 
     if ( setup.bmRequestType != REQUEST_DEVICETOHOST  || setup.bRequest != GET_DESCRIPTOR || setup.wValueH != USB_STRING_DESCRIPTOR_TYPE)  {
 

@@ -11,8 +11,8 @@ public:
   FingerprintUSBHost_(void);
   int begin(void);
   void guessHostOS(String &os);
-    //  USBSetup usbSetups[64];
-    // int usbSetupCount = 0;
+  USBSetup usbSetups[32];
+  int usbSetupCount = 0;
 
 protected:
   // Implementation of the PluggableUSBModule
