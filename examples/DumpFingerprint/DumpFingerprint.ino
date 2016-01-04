@@ -12,7 +12,7 @@ void setup() {
   Keyboard.print(os);  Keyboard.println(".");
 
   Keyboard.print(".\n\n");
-  
+
   Keyboard.print("If I'm wrong Please submit a GitHub issue with the following data at:\n");
   Keyboard.print("https://github.com/keyboardio/FingerprintUSBHost/issues\n");
   Keyboard.print("Be sure to include your OS and OS version.\n\n");
@@ -23,22 +23,22 @@ void setup() {
 
     USBSetup s = FingerprintUSBHost.usbSetups[i];
 
-  Keyboard.print(s.bmRequestType, HEX);
-      Keyboard.print(",");
+    Keyboard.print(s.bmRequestType, HEX);
+    Keyboard.print(",");
 
-  Keyboard.print(s.bRequest, HEX);
-      Keyboard.print(",");
-  Keyboard.print(s.wValueH, HEX);
-      Keyboard.print(",");
-  Keyboard.print(s.wValueL, HEX);
-      Keyboard.print(",");
-  
+    Keyboard.print(s.bRequest, HEX);
+    Keyboard.print(",");
+    Keyboard.print(s.wValueH, HEX);
+    Keyboard.print(",");
+    Keyboard.print(s.wValueL, HEX);
+    Keyboard.print(",");
+
     Keyboard.print(s.wIndex, HEX);
-      Keyboard.print(",");
-      Keyboard.print(s.wLength, HEX);
+    Keyboard.print(",");
+    Keyboard.print(s.wLength, HEX);
 
     Keyboard.print("\n");
-  delay(10);
+    delay(10);
 
   }
 }
