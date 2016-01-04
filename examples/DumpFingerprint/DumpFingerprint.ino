@@ -2,6 +2,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 
+
+// This example depends on a large data structure that's commented out in the codebase
 void setup() {
   // put your setup code here, to run once:
     FingerprintUSBHost.begin();
