@@ -1,0 +1,43 @@
+This is a trivial proof of concept Arduino library that uses 1.6.7's
+new PluggableUSB system to inspect USB Descriptors and guess the
+host operating system based on markers it sees. The first version
+of this library uses markers in GET_DESCRIPTOR requests for String
+Descriptors. There's more that can be done.
+
+ 
+ #include "FingerprintUSBHost.h"
+ 
+ void setup() {
+   Serial.begin(9600);
+   String os;
+   delay(15000); // Take a moment to let things settle
+  
+   FingerprintUSBHost.guessHostOS(os);
+   Serial.print("I think the Host OS is ");
+   Serial.print(os);
+   Serial.println();
+ 
+ }
+ void loop() {
+   // put your main code here, to run repeatedly:
+ 
+ }
+
+So far, it's only been tested on:
+
+Mac OS X 10.10.5
+Mac OS X 10.11
+Windows 10
+ChromeOS
+Android
+iOS 9.1
+
+As of now, it still identifies iOS as OS X. (OSX 10.11 uses iOS's USB Stack)
+
+ChromeOS and Android are both identified as Linux (since they're both using the Linux USB stack.)
+
+Pull requests to improve the detection logic are very welcome.
+
+Jesse Vincent
+jesse@keyboard.io
+2016.01.03
