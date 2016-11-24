@@ -29,17 +29,34 @@ int FingerprintUSBHost_::getDescriptor(USBSetup& setup) {
     return 0;
 }
 
-void FingerprintUSBHost_::guessHostOS(String &os) {
+GuessedHost::OSVariant FingerprintUSBHost_::guessHostOS(void) {
 
     if (not_mac > 0 && not_linux > 0 && maybe_win > 0) {
-        os="Windows";
+        return GuessedHost::WINDOWS;
     } else if ( maybe_linux > 0 && not_linux == 0 ) {
-        os="Linux";
+        return GuessedHost::LINUX;
     } else if ( not_mac == 0)  {
-        os="MacOS";
+        return GuessedHost::MACOS;
 
     } else {
+        return GuessedHost::UNSURE;
+    }
+}
+
+void FingerprintUSBHost_::guessHostOS(String &os) {
+    switch (guessHostOS ()) {
+    case GuessedHost::WINDOWS:
+        os="Windows";
+        break;
+    case GuessedHost::LINUX:
+        os="Linux";
+        break;
+    case GuessedHost::MACOS:
+        os="MacOS";
+        break;
+    default:
         os="unsure";
+        break;
     }
 }
 

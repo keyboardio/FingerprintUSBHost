@@ -4,11 +4,20 @@
 #include <Arduino.h>
 #include "PluggableUSB.h"
 
+namespace GuessedHost {
+typedef enum {
+    UNSURE,
+    LINUX,
+    WINDOWS,
+    MACOS,
+} OSVariant;
+};
 
 class FingerprintUSBHost_ : public PluggableUSBModule {
   public:
     FingerprintUSBHost_(void);
     int begin(void);
+    GuessedHost::OSVariant guessHostOS(void);
     void guessHostOS(String &os);
     USBSetup usbSetups[32];
     int usbSetupCount = 0;
