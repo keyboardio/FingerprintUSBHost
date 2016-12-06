@@ -31,13 +31,14 @@ class FingerprintUSBHost_ : public PluggableUSBModule {
 
   private:
     uint8_t epType[0];
-    uint8_t maybe_linux = 0;
-    uint8_t maybe_win = 0;
-    uint8_t maybe_mac = 0;
-    uint8_t not_linux = 0;
-    uint8_t not_win = 0;
-    uint8_t not_mac = 0;
-
+    struct {
+        uint8_t maybe_linux:1;
+        uint8_t maybe_win:1;
+        uint8_t maybe_mac:1;
+        uint8_t not_linux:1;
+        uint8_t not_win:1;
+        uint8_t not_mac:1;
+    } guess;
 
 
 };

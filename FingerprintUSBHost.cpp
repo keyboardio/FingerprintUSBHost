@@ -18,12 +18,11 @@ int FingerprintUSBHost_::getDescriptor(USBSetup& setup) {
 
 
     if (setup.wLength == 0xff) {
-        maybe_linux++;
-        maybe_win++;
-        not_mac++; // In testing, MacOS NEVER sets a descript request lenght of 255
+        guess.maybe_linux = 1;
+        guess.maybe_win = 1;
+        guess.not_mac = 1; // In testing, MacOS NEVER sets a descript request lenght of 255
     } else {
-
-        not_linux++; // In testing, Linux ALWAYS sets a descriptor request length of 255;
+        guess.not_linux = 1; // In testing, Linux ALWAYS sets a descriptor request length of 255;
     }
 
     return 0;
@@ -31,11 +30,11 @@ int FingerprintUSBHost_::getDescriptor(USBSetup& setup) {
 
 GuessedHost::OSVariant FingerprintUSBHost_::guessHostOS(void) {
 
-    if (not_mac > 0 && not_linux > 0 && maybe_win > 0) {
+    if (guess.not_mac && guess.not_linux && guess.maybe_win) {
         return GuessedHost::WINDOWS;
-    } else if ( maybe_linux > 0 && not_linux == 0 ) {
+    } else if ( guess.maybe_linux && !guess.not_linux ) {
         return GuessedHost::LINUX;
-    } else if ( not_mac == 0)  {
+    } else if ( ! guess.not_mac )  {
         return GuessedHost::MACOS;
 
     } else {
@@ -67,6 +66,7 @@ bool FingerprintUSBHost_::setup(USBSetup& setup) {
 }
 
 FingerprintUSBHost_::FingerprintUSBHost_(void) : PluggableUSBModule(0, 0, epType) {
+    memset(&guess, 0, sizeof(guess));
     PluggableUSB().plug(this);
 }
 
