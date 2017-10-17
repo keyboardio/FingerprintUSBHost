@@ -19,6 +19,10 @@ class FingerprintUSBHost_ : public PluggableUSBModule {
     int begin(void);
     GuessedHost::OSVariant guessHostOS(void);
     void guessHostOS(String &os);
+#ifdef DEBUG
+    USBSetup usbSetups[32];
+    int usbSetupCount = 0;
+#endif
 
   protected:
     // Implementation of the PluggableUSBModule
