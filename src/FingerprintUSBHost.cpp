@@ -9,7 +9,9 @@ int FingerprintUSBHost_::getInterface(uint8_t* interfaceCount) {
 }
 
 int FingerprintUSBHost_::getDescriptor(USBSetup& setup) {
+#ifdef DEBUG
     usbSetups[usbSetupCount++] = setup;
+#endif
 
     if (setup.bmRequestType != REQUEST_DEVICETOHOST  || setup.bRequest != GET_DESCRIPTOR || setup.wValueH != USB_STRING_DESCRIPTOR_TYPE)  {
 
@@ -61,7 +63,6 @@ void FingerprintUSBHost_::guessHostOS(String &os) {
 
 
 bool FingerprintUSBHost_::setup(USBSetup& setup) {
-//    usbSetups[usbSetupCount++] = setup;
     return false;
 }
 
