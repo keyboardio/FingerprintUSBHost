@@ -1,3 +1,4 @@
+#define DEBUG
 #include "FingerprintUSBHost.h"
 #include "Keyboard.h"
 
